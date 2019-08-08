@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src = "../lib/jquery.js"></script>
+    <script src = "../lib/d3.js"></script>
+    <script src = "../lib/paper-full.js "></script>
+    <script src = "../src/marchingants.js"></script>
+</head>
+<body>
+
+    <canvas id = "mycanvas" width = "800" height="800">
+    </canvas>
+
+    <script>
+        function addAnttoSvg(){
+
+            var canvas = document.getElementsByTagName("canvas")[0];
+
+            var antPoints = []
+
+            paper.setup(canvas);
+            paper.install(window);
+
+            // paper.project.importSVG("{{static_url('./svg/111.svg')}}", function(item){
+            paper.project.importSVG('../svg/111.svg', function(item){
+                console.log("item",item)
+
+                antModal = item._children[1]
+                // antModal.fillColor = 'blue'
+                // antModal.visible = false;
+
+                //antModal.segments.forEach(function(d){
+                //  antPoints.push([d.point.x, d.point.y])
+                //})
+                console.log("antModal", antModal)
+
+                var groupId = "1"
+                var path = [[3,33],[360,33]]
+                var boundary = [[0,3],[350,3],[350,77],[0,77]]
+
+                var speed = 25
+                var space = 40
+                var color = "#01718C"
+                MA_Start()
+                marchingAnt2(antModal, path, boundary, speed, space, groupId, color)
+                MA_End()
+            })
+        }
+    </script>
+    <script>addAnttoSvg()</script>
+</body>
+</html>
